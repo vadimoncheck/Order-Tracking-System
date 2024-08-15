@@ -35,10 +35,6 @@
 
 # Notes
 
-### Laravel Versions
-- [Laravel 11.x](https://github.com/refactorian/laravel-docker/tree/main)
-- [Laravel 10.x](https://github.com/refactorian/laravel-docker/tree/laravel_10x)
-
 ### Laravel App
 - URL: http://localhost
 
@@ -48,16 +44,16 @@
 ### phpMyAdmin
 - URL: http://localhost:8080
 - Server: `db`
-- Username: `root`
-- Password: `password`
-- Database: `local`
+- Username: `refactorian`
+- Password: `refactorian`
+- Database: `refactorian`
 
 ### Adminer
 - URL: http://localhost:9090
 - Server: `db`
-- Username: `root`
-- Password: `password`
-- Database: `local`
+- Username: `refactorian`
+- Password: `refactorian`
+- Database: `refactorian`
 
 ### Basic docker compose commands
 - Build or rebuild services
