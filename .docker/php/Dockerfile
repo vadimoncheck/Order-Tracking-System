@@ -6,7 +6,7 @@ COPY .bashrc /root/
 
 # mix
 RUN apt-get update \
-  && apt-get install -y build-essential zlib1g-dev default-mysql-client curl gnupg procps vim git unzip libzip-dev libpq-dev \
+  && apt-get install -y build-essential zlib1g-dev default-mysql-client curl gnupg procps vim git unzip libzip-dev libpq-dev supervisor \
   && docker-php-ext-install zip pdo_mysql pdo_pgsql pgsql
 
 # intl
@@ -25,10 +25,13 @@ RUN pecl install redis && docker-php-ext-enable redis
 # pcov
 RUN pecl install pcov && docker-php-ext-enable pcov
 
+# pcntl
+RUN docker-php-ext-install pcntl
+
 # Xdebug
-# RUN pecl install xdebug \
-# && docker-php-ext-enable xdebug \
-# && echo ";zend_extension=xdebug" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Node.js, NPM, Yarn
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
@@ -53,3 +56,16 @@ RUN git clone https://github.com/seebi/dircolors-solarized
 
 EXPOSE 5173
 WORKDIR /var/www
+
+# Copy existing application directory permissions
+COPY --chown=www-data:www-data . /var/www
+
+# Create directory for supervisor logs
+RUN mkdir -p "/etc/supervisor/logs"
+
+# Copy supervisor configs
+COPY supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copy existing application directory contents
+COPY . /var/www
+

@@ -9,6 +9,10 @@ services:
             - 5173:5173
         volumes:
             - .:/var/www:cached
+        environment:
+            PHP_IDE_CONFIG: 'serverName=Docker'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
 
     ####################################################################################################
     # Nginx
@@ -91,14 +95,14 @@ services:
     ####################################################################################################
     # RabbitMQ
     ####################################################################################################
-    rabbitmq:
-        image: rabbitmq:3-management
-        ports:
-            - 5672:5672
-            - 15672:15672
-        volumes:
-            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+#    rabbitmq:
+#        image: rabbitmq:3-management
+#        ports:
+#            - 5672:5672
+#            - 15672:15672
+#        volumes:
+#            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+#            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
 
     # ####################################################################################################
     # # DATABASE (MariaDB)

@@ -87,3 +87,19 @@
     - `vendor/bin/rector process --dry-run`
 - Process
     - `vendor/bin/rector process`
+
+### API Documentation
+- Register
+    - You can register a new user at this address -  `/api/register` using email and password
+
+- Login
+  - You can get an access token at this address -  `/api/login` using email and password
+
+- Api endpoint `For these endpoint, use a bearer token`
+
+  - GET `/api/orders` - You can also use parameters `perPage, page,dateFrom, dateTo`
+  - POST `/api/orders` body - `{"product_name": "some name", "amount": "some amount" }`
+  - GET `/api/orders/{id}`
+  - PUT|PATCH `/api/orders/{id}` body - `{"status": "some name edited"}`
+  - DELETE `/api/orders/{id}`
+  - GET `/api/orders/export/{format}`
